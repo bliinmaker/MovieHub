@@ -1,27 +1,35 @@
 from http.server import HTTPServer, BaseHTTPRequestHandler
 
 import db
-
-HOST, PORT = '127.0.0.1', 8000
-OK = 200
-MAIN_PAGE = 'index.html'
+from typing import Optional
+import config
 
 class MyRequestHandler(BaseHTTPRequestHandler):
     db_connection, db_cursor = db.connect()
 
-    def do_GET(self) -> None:
-        self.send_response(OK)
-        self.send_header('Content-Type', 'text/html')
+    def respond(self,
+                status: int,
+                body: Optional[str] = None,
+                headers: Optional[dict] = None,
+                ) -> None:
+        self.send_response(status)
+        self.send_header(*config.CONTENT_HEADER)
+        if headers:
+            for header_key, value in headers.items():
+                self.send_header(header_key, value)
         self.end_headers()
-        with open(MAIN_PAGE, 'r') as file:
+        self.wfile.write(body.encode())
+
+    def do_GET(self) -> None:
+        with open(config.TEMPLATE_MAIN, 'r') as file:
             page = file.read()
         movies = '<br>'.join(str(movie) for movie in db.get_movies(self.db_cursor))
         page_with_datetime = page.format(movies=movies)
-        self.wfile.write(page_with_datetime.encode())
+        self.respond(config.OK, page_with_datetime)
 
 if __name__ == '__main__':
-    server = HTTPServer((HOST, PORT), MyRequestHandler)
-    print(f'Server started at http://{HOST}:{PORT}')
+    server = HTTPServer((config.HOST, config.PORT), MyRequestHandler)
+    print(f'Server started at http://{config.HOST}:{config.PORT}')
     try:
         server.serve_forever()
     except KeyboardInterrupt:

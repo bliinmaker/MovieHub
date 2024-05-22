@@ -1,6 +1,7 @@
 import psycopg
 import dotenv
 import os
+import query
 
 def connect() -> tuple[psycopg.Connection, psycopg.Cursor]:
     dotenv.load_dotenv()
@@ -17,6 +18,6 @@ def connect() -> tuple[psycopg.Connection, psycopg.Cursor]:
     return connection, cursor
 
 def get_movies(cursor: psycopg.Cursor) -> list[tuple]:
-    cursor.execute('select * from movie;')
+    cursor.execute(query.GET_MOVIES)
     movies = cursor.fetchall()
     return movies
