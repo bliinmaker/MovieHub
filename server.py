@@ -5,6 +5,7 @@ from typing import Optional
 import config
 import views
 
+
 class MyRequestHandler(BaseHTTPRequestHandler):
     db_connection, db_cursor = db.connect()
 
@@ -21,9 +22,24 @@ class MyRequestHandler(BaseHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(body.encode())
 
-    def do_GET(self) -> None:
+    def movies_page(self) -> None:
         movies = db.get_movies(self.db_cursor)
         self.respond(config.OK, views.movies_page(movies))
+
+    def main_page(self) -> None:
+        self.respond(config.OK, views.main_page())
+
+    def actors_page(self) -> None:
+        self.respond(config.OK, views.actors_page())
+
+    def do_GET(self) -> None:
+        if self.path.startswith('/actors'):
+            self.actors_page()
+        elif self.path.startswith('/movies'):
+            self.movies_page()
+        else:
+            self.main_page()
+
 
 if __name__ == '__main__':
     server = HTTPServer((config.HOST, config.PORT), MyRequestHandler)
