@@ -9,16 +9,20 @@ def load_page(template_path: str, params: Optional[dict] = None) -> str:
 
 
 def movies_page(movies: list) -> str:
-    return load_page(config.TEMPLATE_MOVIES, {'movies': movies_html(movies)})
+    return load_page(config.TEMPLATE_MOVIES, {'movies': movies})
 
 
-def movies_html(movies: list[tuple]) -> str:
-    return '\n'.join([f'<li>{movie} lat: {lat}, lon: {lon} </li>' for movie, lat, lon in movies])
+def main_page(movies: list) -> str:
+    return load_page(config.TEMPLATE_MAIN, {'movies': movies})
 
 
-def main_page() -> str:
-    return load_page(config.TEMPLATE_MAIN)
+def actors_page(actors: list[tuple]) -> str:
+    return load_page(config.TEMPLATE_ACTORS, {'actors': actors})
 
 
-def actors_page() -> str:
-    return load_page(config.TEMPLATE_ACTORS)
+def spaces_to_plusses(text: str) -> str:
+    return text.replace(' ', '+')
+
+
+def plusses_to_spaces(text: str) -> str:
+    return text.replace('+', ' ')

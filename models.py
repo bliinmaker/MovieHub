@@ -1,7 +1,7 @@
 from datetime import date
 from uuid import UUID, uuid4
 
-from sqlalchemy import CheckConstraint, ForeignKey, UniqueConstraint
+from sqlalchemy import CheckConstraint, ForeignKey, UniqueConstraint, Column, String, DateTime, func
 from sqlalchemy.orm import (DeclarativeBase, Mapped, MappedColumn,
                             mapped_column, relationship)
 
@@ -14,11 +14,15 @@ class UUIDMixin:
     id: Mapped[UUID] = mapped_column(primary_key=True, default=uuid4)
 
 
-class CreatedMixin:
-    creating_date: Mapped[date] = mapped_column(default=date.today())
+class Token(UUIDMixin, Base):
+    __tablename__ = 'token'
+
+    value: MappedColumn[str] = Column(String, unique=True, nullable=False)
+
+    __table_args__ = (UniqueConstraint('value', name='_token_uc'),)
 
 
-class Actor(UUIDMixin, CreatedMixin, Base):
+class Actor(UUIDMixin, Base):
     __tablename__ = 'actor'
     full_name: MappedColumn[str]
     birth_date: MappedColumn[str]
@@ -30,11 +34,10 @@ class Actor(UUIDMixin, CreatedMixin, Base):
     __table_args__ = (
         CheckConstraint('length(full_name) <= 30',
                         'full_name_valid_length'),
-        UniqueConstraint('full_name', name='full_name_unique')
     )
 
 
-class Movie(UUIDMixin, CreatedMixin, Base):
+class Movie(UUIDMixin, Base):
     __tablename__ = 'movie'
     title: MappedColumn[str]
     description: MappedColumn[str]
