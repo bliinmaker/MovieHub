@@ -48,5 +48,6 @@ jobs:
         run: |
           python3 server.py
           python3 db.py
+          pytest test_rest.py
       - name: Pytest
         run: pytest test_rest.py
