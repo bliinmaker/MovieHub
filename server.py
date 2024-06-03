@@ -2,7 +2,7 @@
 
 import json
 import os
-from http.server import BaseHTTPRequestHandler, HTTPServer
+from http.server import BaseHTTPRequestHandler, HTTPServer, ThreadingHTTPServer
 from typing import Optional as Option
 from uuid import UUID
 
@@ -294,7 +294,7 @@ class MyRequestHandler(BaseHTTPRequestHandler):
 
 
 if __name__ == '__main__':
-    server = HTTPServer((config.HOST, config.PORT), connect_my_handler(MyRequestHandler))
+    server = ThreadingHTTPServer((config.HOST, config.PORT), connect_my_handler(MyRequestHandler))
     print(f'Server started at http://{config.HOST}:{config.PORT}')
     try:
         server.serve_forever()
