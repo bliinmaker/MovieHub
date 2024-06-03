@@ -2,7 +2,7 @@
 
 import json
 import os
-from http.server import BaseHTTPRequestHandler, HTTPServer, ThreadingHTTPServer
+from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from typing import Optional as Option
 from uuid import UUID
 
