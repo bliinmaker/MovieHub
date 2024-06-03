@@ -1,16 +1,11 @@
 """Tests REST API endpoints for movie management."""
 
-import os
-
-import dotenv
 import pytest
 import requests
 
 from config import AUTH_HEADER, CREATED, NO_CONTENT, OK
 
-dotenv.load_dotenv()
-
-HEADERS = {AUTH_HEADER: os.environ.get('API_KEY')}
+HEADERS = {AUTH_HEADER: '5720906c'}
 BASE_URL = 'http://localhost:8000/movies'
 
 TEST_MOVIE_CREATE = {
