@@ -24,7 +24,7 @@ def get_db_url() -> str:
 
 if __name__ == '__main__':
     engine = create_engine(get_db_url())
-    # Base.metadata.create_all(bind=engine)
+    Base.metadata.create_all(bind=engine)
     # Base.metadata.drop_all(engine)
 
     # with Session(engine) as session:
