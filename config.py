@@ -1,6 +1,6 @@
 """Defines constants for database operations and web server configurations."""
 
-HOST, PORT = '127.0.0.1', 8000
+HOST, PORT = '127.0.0.1', 8080
 
 OK = 200
 CREATED = 201
