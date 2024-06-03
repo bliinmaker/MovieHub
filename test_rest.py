@@ -6,7 +6,7 @@ import requests
 from config import AUTH_HEADER, CREATED, NO_CONTENT, OK
 
 HEADERS = {AUTH_HEADER: '5720906c'}
-BASE_URL = 'http://localhost:8000/movies'
+BASE_URL = 'http://localhost:8080/movies'
 
 TEST_MOVIE_CREATE = {
     'title': 'Супер филм?!',
