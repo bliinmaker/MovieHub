@@ -9,6 +9,8 @@ from sqlalchemy.orm import Session
 
 from models import Actor, Base, Movie, Token
 
+dotenv.load_dotenv()
+
 
 def get_db_url() -> str:
     """
