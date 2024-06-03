@@ -31,6 +31,6 @@ jobs:
         pip install pytest
         pip install requests
         pip install python-dotenv
-        pip install os
+        pip install os-sys
     - name: Pytest
       run: pytest test_rest.py
