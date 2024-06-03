@@ -1,3 +1,5 @@
+"""Defines constants for database operations and web server configurations."""
+
 HOST, PORT = '127.0.0.1', 8000
 
 OK = 200
@@ -10,7 +12,7 @@ NOT_FOUND = 404
 NOT_ALLOWED = 405
 ACCEPTED = 202
 
-CONTENT_TYPE = 'html'  # NOTE switch content
+CONTENT_TYPE = 'html'
 CONTENT_LEN_HEADER = 'Content-Length'
 CONTENT_HEADER = 'Content-Type', f'text/{CONTENT_TYPE}'
 ALLOW_HEADER = {'Allow': '[GET, HEAD]'}

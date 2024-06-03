@@ -1,3 +1,5 @@
+"""This module contains SQL queries for interacting with a database."""
+
 GET_MOVIES = 'select * from movie'
 GET_ACTORS = 'select * from actor'
 GET_TITLE_BY_MOVIE = 'select title from movie'
