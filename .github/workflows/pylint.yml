@@ -45,6 +45,8 @@ jobs:
       - name: Start DB
         run: python3 main.py
       - name: Start server
-        run: python3 server.py
+        run: |
+          python3 server.py
+          python3 db.py
       - name: Pytest
         run: pytest test_rest.py
