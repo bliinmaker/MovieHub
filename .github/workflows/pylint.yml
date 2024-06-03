@@ -44,10 +44,10 @@ jobs:
           echo "PG_HOST=127.0.0.1" >>.env
       - name: Start DB
         run: python3 main.py
-      - name: Start server
-        run: |
-          python3 server.py
-          python3 db.py
-          pytest test_rest.py
+#      - name: Start server
+#        run: |
+#          python3 server.py
+#          python3 db.py
+#          pytest test_rest.py
       - name: Pytest
         run: pytest test_rest.py
