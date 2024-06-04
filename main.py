@@ -29,7 +29,7 @@ if __name__ == '__main__':
     Base.metadata.create_all(bind=engine)
     # Base.metadata.drop_all(engine)
 
-    # with Session(engine) as session:
+    with Session(engine) as session:
     #     movie1 = Movie(
     #             title='The Matrix',
     #             description='A computer hacker learns from mysterious rebels about the true nature of his reality and his role in the war against its controllers.',
@@ -206,9 +206,11 @@ if __name__ == '__main__':
     #                 ),
     #             ]
     #         )
-    #     token = Token(
-    #         value='5720906c'
-    #     )
+        token = Token(
+            value='5720906c'
+        )
+        session.add(token)
+        session.commit()
     #
     #     session.add(movie1)
     #     session.add(movie2)
@@ -218,6 +220,3 @@ if __name__ == '__main__':
     #     session.add(movie6)
     #     session.add(movie7)
     #     session.add(movie8)
-    #     session.add(token)
-    #
-    #     session.commit()
