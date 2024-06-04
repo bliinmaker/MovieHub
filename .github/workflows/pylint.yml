@@ -42,6 +42,7 @@ jobs:
           echo "PG_PASSWORD=test" >>.env
           echo "PG_DBNAME=test" >>.env
           echo "PG_HOST=127.0.0.1" >>.env
+          echo "API_KEY=5720906c" >>.env
       - name: Start DB
         run: python3 main.py
       - name: Start server
