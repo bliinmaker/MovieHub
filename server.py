@@ -147,10 +147,10 @@ class MyRequestHandler(BaseHTTPRequestHandler):
 
     def do_GET(self) -> None:
         """Handle GET requests and routes them to the appropriate handler based on the request path."""
-        if self.path.startswith('/actors'):
-            self.actors_page()
         if self.path.startswith('/rating'):
             self.handle_movie_rating_request()
+        elif self.path.startswith('/actors'):
+            self.actors_page()
         elif self.path.startswith('/movies'):
             self.movies_page()
         else:
